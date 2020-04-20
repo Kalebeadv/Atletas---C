@@ -6,6 +6,8 @@
 void determina_o_tempo_de_cada_participante( int classificacao[281][1]);
 void exibe_o_tempo_dos_tres_primeiros_colocados(int classificacao[281][1]);
 int exibe_a_media_dos_8_primeiros_colocados(int classificacao[281][1]);
+void exibe_o_percentual_de_atletas_ACIMA_da_media(int classificacao[281][1],int media);
+void exibe_o_percentual_de_atletas_ABAIXO_da_media(int classificacao[281][1],int media);
 
    
 int main()
@@ -14,7 +16,9 @@ int main()
   int classificacao[281][1];
   determina_o_tempo_de_cada_participante(classificacao);
   exibe_o_tempo_dos_tres_primeiros_colocados(classificacao);
- float media = exibe_a_media_dos_8_primeiros_colocados(classificacao);
+  float media = exibe_a_media_dos_8_primeiros_colocados(classificacao);
+  exibe_o_percentual_de_atletas_ACIMA_da_media(classificacao,media);
+  exibe_o_percentual_de_atletas_ABAIXO_da_media(classificacao,media);
   
  
 }
@@ -30,7 +34,6 @@ void determina_o_tempo_de_cada_participante( int classificacao[281][1])
      classificacao[i][j] = i*3;
   
    }
-
   }
 }
 
@@ -41,7 +44,7 @@ void exibe_o_tempo_dos_tres_primeiros_colocados(int classificacao[281][1])
   {
    for(int j = 0; j < 1; j++)
    {
-     printf("COLOCACAO: [%d]   TEMPO: %d\n", i, classificacao[i][j]);
+     printf("COLOCACAO: [%d]   TEMPO: %d minutos\n", i, classificacao[i][j]);
    }
   }
   printf("\n------------------------------\n");
@@ -58,7 +61,7 @@ int exibe_a_media_dos_8_primeiros_colocados(int classificacao[281][1])
     
     if(i < 8) media_dos_8_colocados += classificacao[i][j];
     else if(i == 8) media_dos_8_colocados = (media_dos_8_colocados+ classificacao[i][j])/8;
-    printf("%d Posicao, tempo: %d\n",i, classificacao[i][j]);
+    printf("%d Posicao, tempo: %d minutos\n",i, classificacao[i][j]);
    }
   }
 
@@ -67,4 +70,29 @@ int exibe_a_media_dos_8_primeiros_colocados(int classificacao[281][1])
   return media_dos_8_colocados;
 }
 
-void exibe_o_percentual_de_atletas_acima_da_media
+void exibe_o_percentual_de_atletas_ACIMA_da_media(int classificacao[281][1],int media)
+{
+  printf("\n------------------------------\n");
+  printf("Atletas com o tempo ACIMA da média\n\n");
+  for(int i = 1; i < 281; i++)
+  {
+   for(int j = 0; j < 1; j++)
+   {
+    if(classificacao[i][j] > media) printf("%d posicao, tempo: %d minutos\n", i, classificacao[i][j]);
+   }
+  }
+}
+
+void exibe_o_percentual_de_atletas_ABAIXO_da_media(int classificacao[281][1],int media)
+{
+  printf("\n------------------------------\n");
+  printf("Atletas com o tempo ABAIXO da média\n\n");
+  for(int i = 1; i < 281; i++)
+  {
+   for(int j = 0; j < 1; j++)
+   {
+    if(classificacao[i][j] < media) printf("%d posicao, tempo: %d minutos\n", i, classificacao[i][j]);
+   }
+  }
+  printf("\n------------------------------\n");
+}
